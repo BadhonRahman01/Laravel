@@ -1,0 +1,1 @@
+The Value is : {{ $number['a'] }}

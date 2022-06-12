@@ -4,27 +4,30 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class ExampleProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
-        app()->bind('first service', function($app){
-            dd('first container');
-        });
+        //
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        //
+      $data=array();
+      $data['a']=10;
+      $data['b']=20;
+      $data['c']=30;
+
+      view()->share('number',$data);
     }
 }
