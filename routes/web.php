@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\firstcontroller;
+use App\Http\Controllers\ByController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +39,16 @@ Route::get('/about', function (Request $request) {
 //     return view('about');
 //     return redirect('/contact');
 // })->name('contact.us');
+Route::get('/about', [firstcontroller::class, 'index']);
 
-Route::get('/country', function(){
-    return view('country');
-})->Middleware('CountryMW');
+Route::get('/test', ByController::class);
 
+
+Route::get('/country', [firstcontroller::class, 'country'])->Middleware('CountryMW');
+// Route::get('/country', function(){
+//     return view('country');
+// })->Middleware('CountryMW');
+Route::resource('photos', PhotoController::class);
 
 
 Route::get('/dashboard', function () {
