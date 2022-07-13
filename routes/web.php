@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\firstcontroller;
 use App\Http\Controllers\ByController;
 use App\Http\Controllers\PhotoController;
+use App\http\Controllers\Example\SecondController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::post('/student/store', [firstController::class, 'Studentstore'])->name('student.store');
+
+Route::get('/testone', [SecondController::class, 'test']);
