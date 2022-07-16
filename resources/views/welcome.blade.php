@@ -120,9 +120,14 @@
                                 Sponsor
                             </a>
                             <a href="{{ url('about')}}" class="ml-1 underline">
-
-                          
                                 About
+                            </a>
+                            
+                            <a href="{{ url('contact')}}" class="ml-1 underline">
+                                Contact
+                            </a>
+                            <a href="{{ url('laravel')}}" class="ml-1 underline">
+                                Laravel
                             </a>
                         </div>
                     </div>

@@ -61,3 +61,23 @@ require __DIR__.'/auth.php';
 Route::post('/student/store', [firstController::class, 'Studentstore'])->name('student.store');
 
 Route::get('/testone', [SecondController::class, 'test']);
+
+
+Route::get('/laravel', [firstController::class, 'laravel'])->name('laravel');
+
+// Route::get('/test', function(Request $request){
+//     //session(['name' => 'Badhon Sung Woo']);
+//     $request->session()->put('age', 'young');
+// });
+
+// Route::get('/all', function(Request $request){
+//     return $request->session()->all();
+//$request->session()->flash();
+// });
+
+
+Route::get('/contact', function (Request $request) {
+    return view('contact');
+});
+
+Route::post('/store/contact', [firstController::class, 'store'])->name('store.contact');
