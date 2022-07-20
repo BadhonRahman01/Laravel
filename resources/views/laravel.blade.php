@@ -1,7 +1,7 @@
-<h1> Laravel Page {{$name}}</h1>
 
-{{url()->current()}}
+<h1> Laravel Page </h1>
+<!-- {{url()->current()}}
 
 {{
     URL::current()
-}}
+}} -->

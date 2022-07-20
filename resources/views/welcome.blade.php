@@ -101,6 +101,9 @@
                     </div>
                 </div>
 
+                @if(Auth::check())
+<h2 >Yes Loggeddin</h2>
+@endif
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
                         <div class="flex items-center">
@@ -131,7 +134,15 @@
                             </a>
                         </div>
                     </div>
+                    
+                <!-- @php
+                if (Auth::check()){
+                    echo "Yes you are logged in";
+                }
+                @endphp -->
 
+
+            
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>

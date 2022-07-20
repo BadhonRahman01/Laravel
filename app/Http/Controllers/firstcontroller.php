@@ -47,7 +47,9 @@ class firstcontroller extends Controller
             'password' => 'required|min:6|max:12',
         ]);
         
-        dd($request->all());
+        \Log::channel('contactstore')->info('the contact form submitted by'.rand(1,20));
+        return redirect()->back();
+        //dd($request->all());
     }
 
 }

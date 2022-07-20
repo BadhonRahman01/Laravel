@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\firstcontroller;
-use App\Http\Controllers\ByController;
-use App\Http\Controllers\PhotoController;
-use App\http\Controllers\Example\SecondController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,63 +17,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    app()->make('first service');
-});
-
-Route::get('/about', function (Request $request) {
-    // $token = $request->session()->token();
-    // $token = csrf_token();
-    // dd($token);
-    return view('about');
-});
-// Route::view('/about', 'about');
-// Route::get('/about/{roll}', function($roll)
-// {
-//     return "My roll is $roll";
-// });
-// Route::match(['get', 'post'],md5('/about'), function () {
-//     return view('about');
-//     return redirect('/contact');
-// })->name('contact.us');
-Route::get('/about', [firstcontroller::class, 'index']);
-
-Route::get('/test', ByController::class);
-
-
-Route::get('/country', [firstcontroller::class, 'country'])->Middleware('CountryMW');
-// Route::get('/country', function(){
-//     return view('country');
-// })->Middleware('CountryMW');
-Route::resource('photos', PhotoController::class);
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Route::post('/student/store', [firstController::class, 'Studentstore'])->name('student.store');
+ 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::get('/testone', [SecondController::class, 'test']);
+Route::get('deposite/money', [App\Http\Controller\HomeController::class, 'deposite'])->name('deposite.money')->middleware('verified');
 
+Route::post('resent-mail', [App\Http\Controller\HomeController::class, 'resent'])->name('varification-resend');
 
-Route::get('/laravel', [firstController::class, 'laravel'])->name('laravel');
-
-// Route::get('/test', function(Request $request){
-//     //session(['name' => 'Badhon Sung Woo']);
-//     $request->session()->put('age', 'young');
-// });
-
-// Route::get('/all', function(Request $request){
-//     return $request->session()->all();
-//$request->session()->flash();
-// });
-
-
-Route::get('/contact', function (Request $request) {
-    return view('contact');
-});
-
-Route::post('/store/contact', [firstController::class, 'store'])->name('store.contact');
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
