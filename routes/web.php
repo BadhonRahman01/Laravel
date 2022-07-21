@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Controllers\HomeController;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +39,9 @@ Route::post('resent-mail', [App\Http\Controller\HomeController::class, 'resent']
 Route::get('/email/verify', function () {
     return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
+
+Route::get('/home', [App\Http\Controller\HomeController::class, 'home'])->name('home');
+
+Route::get('/user/details/{id}', [App\Http\Controller\HomeController::class, 'details'])->name('user.details');
+
+Route::post('/store/user', [App\Http\Controller\HomeController::class, 'store'])->name('store.user');

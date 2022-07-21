@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in!') }} {{ Auth::user()->name}}
+
+                    <a href="{{ route('user.details',Crypt::encryptString('1') }}"> Badhon Details </a>
                 </div>
             </div>
         </div>

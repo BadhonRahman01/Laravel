@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -33,5 +36,15 @@ class HomeController extends Controller
     public function resent()
     {
         
+    }
+    public function details($id)
+    {
+       $id = Crypt::decryptString($id);
+       echo $id;
+    }
+    public function store(Request $request)
+    {
+       $password= Hash::make($request->password);
+       echo $password;
     }
 }
