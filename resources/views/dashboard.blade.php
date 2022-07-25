@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
                 </div> 
-                <form method="post" action=" {{ route('store.user')}}">
+                <!-- <form method="post" action=" {{ route('store.user')}}">
                     @csrf
                     <div>
                             <label>Password</label>
@@ -19,7 +19,7 @@
 
                     </div><br>
                     <button type="submit" class="btn btn-primary" > Submit</button>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>

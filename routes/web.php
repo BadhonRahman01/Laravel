@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Controllers\HomeController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,3 +45,6 @@ Route::get('/home', [App\Http\Controller\HomeController::class, 'home'])->name('
 Route::get('/user/details/{id}', [App\Http\Controller\HomeController::class, 'details'])->name('user.details');
 
 Route::post('/store/user', [App\Http\Controller\HomeController::class, 'store'])->name('store.user');
+
+Route::get('/password/change', [App\Http\Controller\HomeController::class, 'password_change'])->name('password.change')->middleware('verified');
+Route::post('/password/change', [App\Http\Controller\HomeController::class, 'update_password'])->name('update.password')->middleware('verified');

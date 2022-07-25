@@ -35,10 +35,10 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        
+                        <a href="{{ route('password.change') }}">Change Password</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a herf="{{ 'deposite.money' }}">Deposite Money</a>
+                            
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
