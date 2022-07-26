@@ -11,6 +11,8 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
                 </div> 
+                <a href="{{ route('class.index') }}" class="btn btn-info btn-sm">Class</a>
+                    <a href="{{ route('students.index')}}" class="btn btn-info danger">Students</a>
                 <!-- <form method="post" action=" {{ route('store.user')}}">
                     @csrf
                     <div>

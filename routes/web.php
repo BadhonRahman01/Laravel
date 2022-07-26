@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClassController;
+use App\Http\Controllers\StudentController;
+
+Route::get('/class', [ClassController::class, 'index']);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,3 +52,14 @@ Route::post('/store/user', [App\Http\Controller\HomeController::class, 'store'])
 
 Route::get('/password/change', [App\Http\Controller\HomeController::class, 'password_change'])->name('password.change')->middleware('verified');
 Route::post('/password/change', [App\Http\Controller\HomeController::class, 'update_password'])->name('update.password')->middleware('verified');
+
+Route::get('class', [App\Http\Controller\admin\ClassController::class, 'index'])->name('class.index')->middleware('verified');
+Route::get('create/class', [App\Http\Controller\admin\ClassController::class, 'create'])->name('create.class')->middleware('verified');
+
+Route::post('store/class', [App\Http\Controller\ClassController::class, 'store'])->name('store.class')->middleware('verified');
+Route::get('class/delete/{id}', [App\Http\Controller\ClassController::class, 'delete'])->name('class.delete');
+Route::post('class/update/{id}', [App\Http\Controller\ClassController::class, 'update'])->name('update.class');
+
+
+//student crud
+Route::resource('students', StudentController::class);
