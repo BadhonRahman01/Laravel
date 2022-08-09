@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Model\Student;
+
+
 class StudentController extends Controller
 {
     /**
@@ -14,10 +17,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        
-        $students=DB::table('students')->join('classes','students.class_id', 'classes.id')->get();
+
+        // $students = DB::table('students')->join('classes', 'students.class_id', 'classes.id')->get();
+        // return view('admin.students.index', compact('students'));
         //$students=DB::table('students')->orderBy('roll', 'ASC')->get();
-        return view('admin.students.index',compact('students'));
+        $students=Student::all();
+        return response()->json($students);
+    
     }
 
     /**
@@ -26,8 +32,8 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        $classes=DB::table('classes')->get();
+    {
+        $classes = DB::table('classes')->get();
         return view('admin.students.create');
     }
 
@@ -46,17 +52,17 @@ class StudentController extends Controller
             'phone' => 'required',
             'roll' => 'required',
 
-            ]);
-            $data=array(
-                'class_id' => $request->class_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'roll' => $request->roll,
+        ]);
+        $data = array(
+            'class_id' => $request->class_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'roll' => $request->roll,
 
-            );
-            DB::table('students')->where('id', $id)->update($data);
-            return redirect()->back()->with('success','Successfully inserted');
+        );
+        DB::table('students')->where('id', $id)->update($data);
+        return redirect()->back()->with('success', 'Successfully inserted');
     }
 
     /**
@@ -68,7 +74,7 @@ class StudentController extends Controller
     public function show($id)
     {
         // $student=BD::table('students')->where('id', $id)->first();
-        $student=BD::table('students')->pluck('phone');
+        $student = BD::table('students')->pluck('phone');
         //$student=BD::table('students')->where('id', $id)->value('phone');
         return view('admin.student.view', compact('student'));
     }
@@ -81,8 +87,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $classes=DB::table('classes')->get();
-        $student=DB::table('students')->where('id', $id)->first();
+        $classes = DB::table('classes')->get();
+        $student = DB::table('students')->where('id', $id)->first();
         return view('admin.students.edit', compact('classes', 'student'));
     }
 
@@ -102,17 +108,17 @@ class StudentController extends Controller
             'phone' => 'required',
             'roll' => 'required',
 
-            ]);
-            $data=array(
-                'class_id' => $request->class_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'roll' => $request->roll,
+        ]);
+        $data = array(
+            'class_id' => $request->class_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'roll' => $request->roll,
 
-            );
-            DB::table('students')->where('id', $id)->update($data);
-            return redirect()->route('students.index')->with('success','Successfully updated');
+        );
+        DB::table('students')->where('id', $id)->update($data);
+        return redirect()->route('students.index')->with('success', 'Successfully updated');
     }
 
     /**
@@ -124,6 +130,6 @@ class StudentController extends Controller
     public function destroy($id)
     {
         DB::table('students')->where('id', $id)->delete();
-        return redirect()->back()->with('success','Successfully deleted');
+        return redirect()->back()->with('success', 'Successfully deleted');
     }
 }

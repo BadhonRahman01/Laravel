@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/class', [ClassController::class, 'index']);
 /*
@@ -27,12 +28,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
- 
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
+
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
@@ -63,3 +64,6 @@ Route::post('class/update/{id}', [App\Http\Controller\ClassController::class, 'u
 
 //student crud
 Route::resource('students', StudentController::class);
+
+//category
+Route::get('category/index', [CategoryController::class, 'index'])->name('category.index');
